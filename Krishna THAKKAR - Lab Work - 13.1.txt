@@ -1,0 +1,77 @@
+﻿Q.1 Write a Program to read content from one file and write it to another file.
+Ans: #include <stdio.h>
+
+
+int main() {
+    FILE *source, *destination;
+    char ch;
+
+
+    source = fopen("source.txt", "r");
+    if (source == NULL) {
+        printf("Error opening source file.");
+        return 1;
+    }
+
+
+    destination = fopen("destination.txt", "w");
+    if (destination == NULL) {
+        printf("Error opening destination file.");
+        fclose(source);
+        return 1;
+    }
+
+
+    while ((ch = fgetc(source)) != EOF) {
+        fputc(ch, destination);
+    }
+
+
+    fclose(source);
+    fclose(destination);
+
+
+    return 0;
+}
+
+
+O\p: in source file :hello krishna
+Destination file: hello krishna
+
+
+Q.2 Write a Program to create a new file and write all numbers that are divisible by both 3 and 5 between 1 and 50 into that file.
+
+
+Ans: #include <stdio.h>
+
+
+int main() {
+    FILE *fp;
+    int i;
+
+
+    fp = fopen("numbers.txt", "w");
+    if (fp == NULL) {
+        printf("Unable to create file\n");
+        return 1;
+    }
+
+
+    for (i = 1; i <= 50; i++) {
+        if (i % 3 == 0 && i % 5 == 0) {
+            fprintf(fp, "%d\n", i);
+        }
+    }
+
+
+    printf("Numbers written to file successfully\n");
+
+
+    fclose(fp);
+
+
+    return 0;
+}
+O\p: 15
+30
+45
